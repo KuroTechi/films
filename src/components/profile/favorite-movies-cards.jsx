@@ -9,10 +9,6 @@ import { AutohideSnackbar } from "../cards/auto-hide-Snackbar.jsx";
 function FavoriteMoviesCards() {
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const dispatch = useDispatch();
-  const isLoadingFavoriteMovies = useSelector(
-    (state) => state.favoriteMovies.isLoading
-  );
 
   const dataBaseErrorAddOrRemoveFavoriteMovie = useSelector(
     (state) => state.favoriteMovies.dataBaseErrorAddOrRemoveMovie
@@ -31,10 +27,6 @@ function FavoriteMoviesCards() {
   };
 
   useEffect(() => {
-    dispatch(getFavoriteMovies());
-  }, [dispatch]);
-
-  useEffect(() => {
     if (dataBaseErrorAddOrRemoveFavoriteMovie) {
       setErrorMessage(dataBaseErrorAddOrRemoveFavoriteMovie);
       handleSnakeBarOpen();
@@ -46,9 +38,7 @@ function FavoriteMoviesCards() {
       handleSnakeBarOpen();
     }
   }, [favoriteMoviesError]);
-  if (isLoadingFavoriteMovies) {
-    return <Spinner />;
-  }
+
   if (!favoriteMovies || favoriteMovies.length === 0) {
     return "Нет избранных фильмов";
   }

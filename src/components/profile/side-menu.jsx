@@ -5,7 +5,6 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { FavoriteMoviesCards } from "./favorite-movies-cards";
-import { Button } from "@mui/material";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -51,9 +50,8 @@ export default function VerticalTabs() {
       <Box
         sx={{
           flexGrow: 1,
-          bgcolor: "background.paper",
           display: "flex",
-          paddingTop: "10px",
+          paddingTop: "16px",
         }}
       >
         <Tabs

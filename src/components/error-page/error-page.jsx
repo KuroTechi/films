@@ -24,16 +24,10 @@ function ErrorPage() {
   };
 
   return (
-    <Box
-      sx={{
-        maxWidth: "1280px",
-        margin: "0 auto",
-      }}
-    >
+    <Box>
       <MenuAppBar title={`Фильмы - Ошибка`} />
       <Box
         sx={{
-          maxWidth: "1280px",
           margin: "0 auto",
           display: "flex",
           flexDirection: "column",
