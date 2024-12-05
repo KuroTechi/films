@@ -1,0 +1,38 @@
+.app-container {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  width: 100%;
+}
+.content-wrapper {
+  display: flex;
+  padding: 24px;
+  gap: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #f9f9fd;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #b2c3d4;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  background-color: #f9f9fd;
+}
+
+html {
+  overflow-y: scroll;
+}
+li {
+  list-style-type: none;
+}
+
+ul {
+  margin-left: 0;
+  padding-left: 0;
+}
