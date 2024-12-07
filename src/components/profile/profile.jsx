@@ -27,7 +27,6 @@ export default function Profile() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const handleLogout = () => {
     removeLocalStorageItem("token");
     navigate("/");
