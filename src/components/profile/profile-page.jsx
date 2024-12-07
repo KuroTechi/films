@@ -5,15 +5,18 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavoriteMovies } from "../../store/favoriteMoviesSlice";
 import Spinner from "../spinner/spinner";
+import { getUserInfo } from "../../store/userInfoSlice";
 
 function ProfilePage() {
   const dispatch = useDispatch();
   const isLoadingFavoriteMovies = useSelector(
     (state) => state.favoriteMovies.isLoading
   );
-  const shouldShowSpinner = isLoadingFavoriteMovies;
+  const isLoadingUserInfo = useSelector((state) => state.userInfo.isLoading);
+  const shouldShowSpinner = isLoadingFavoriteMovies || isLoadingUserInfo;
   useEffect(() => {
     dispatch(getFavoriteMovies());
+    dispatch(getUserInfo({ userId: 20039690 }));
   }, [dispatch]);
 
   return (

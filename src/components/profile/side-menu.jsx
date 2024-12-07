@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { FavoriteMoviesCards } from "./favorite-movies-cards";
+import { AboutUser } from "./about-user";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -69,7 +70,7 @@ export default function VerticalTabs() {
           <FavoriteMoviesCards />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Информация о пользователе
+          <AboutUser />
         </TabPanel>
       </Box>
     </>
