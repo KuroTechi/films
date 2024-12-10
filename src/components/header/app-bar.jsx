@@ -4,21 +4,24 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { AuthorizationAndRegistration } from "../authorization-registration/auth-or-reg";
-import { Profile } from "../profile/profile";
+import { AppMenuIcon } from "../profile/profile";
 import { getAndValidateLocalStorageItem } from "../../utils/utils";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { addUserToken } from "../../store/userInfoSlice";
-import { BackButton } from "./back-button";
+import { BackToMainPageButton } from "./back-button";
+
 function MenuAppBar({ title = "Фильмы - Главная", backButton }) {
   const dispatch = useDispatch();
   const userTokenLocalStorage = getAndValidateLocalStorageItem("token");
   const userTokenStore = useSelector((state) => state.userInfo.userToken);
+
   useEffect(() => {
     if (userTokenLocalStorage) {
       dispatch(addUserToken({ userToken: userTokenLocalStorage }));
     }
   }, [dispatch, userTokenLocalStorage]);
+
   return (
     <Box
       sx={{
@@ -34,8 +37,8 @@ function MenuAppBar({ title = "Фильмы - Главная", backButton }) {
           >
             {title}
           </Typography>
-          {backButton && <BackButton />}
-          {!userTokenStore ? <AuthorizationAndRegistration /> : <Profile />}
+          {backButton && <BackToMainPageButton />}
+          {!userTokenStore ? <AuthorizationAndRegistration /> : <AppMenuIcon />}
         </Toolbar>
       </AppBar>
     </Box>

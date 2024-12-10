@@ -23,7 +23,7 @@ function truncateString(str) {
   if (!str) {
     return "Название не найдено";
   }
-  return str.length > 15 ? str.slice(0, 15) + "..." : str;
+  return str.length > 23 ? str.slice(0, 23) + "..." : str;
 }
 
 function getImgUrl(movieBackdropImgPath, moviePosterImgPath) {

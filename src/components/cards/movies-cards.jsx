@@ -38,9 +38,6 @@ function MoviesCards() {
   const moviesBySearch = useSelector((state) => state.moviesBySearch?.movies);
   const movieName = useSelector((state) => state.moviesBySearch.movieName);
 
-  const shouldShowMoviesBySearch =
-    movieName.trim() && moviesBySearch?.results?.length > 0;
-
   const handleSnakeBarOpen = () => {
     setOpenSnackBar(false);
     setTimeout(() => {
@@ -58,32 +55,43 @@ function MoviesCards() {
       handleSnakeBarOpen();
     }
   }, [dataBaseErrorAddOrRemoveFavoriteMovie]);
+
   useEffect(() => {
-    if (moviesByFiltersError || moviesBySearchError || favoriteMoviesError) {
-      setErrorMessage(
-        moviesByFiltersError || moviesBySearchError || favoriteMoviesError
-      );
+    const error =
+      moviesByFiltersError || moviesBySearchError || favoriteMoviesError;
+    if (error) {
+      setErrorMessage(error);
       handleSnakeBarOpen();
     }
   }, [moviesByFiltersError, moviesBySearchError, favoriteMoviesError]);
-  if (
+
+  const shouldShowLoadingSpinner =
     isLoadingFavoriteMovies ||
     isLoadingMoviesByFilters ||
-    isLoadingOptionsForGenresSelect
-  ) {
+    isLoadingOptionsForGenresSelect;
+
+  if (shouldShowLoadingSpinner) {
     return <Spinner />;
   }
 
-  if (moviesBySearch?.results.length === 0 && movieName.trim()) {
+  const shouldShowNoMoviesBySearch =
+    moviesBySearch?.results.length === 0 && movieName.trim();
+
+  if (shouldShowNoMoviesBySearch) {
     return <MoviesNotFound message={"проверьте название"} />;
   }
-  if (
+
+  const shouldShowNoMoviesByFilters =
     moviesByFilters?.results.length === 0 &&
     genresByFilters.length !== 0 &&
-    movieName === ""
-  ) {
+    movieName === "";
+
+  if (shouldShowNoMoviesByFilters) {
     return <MoviesNotFound message={"проверьте выбранные фильтры"} />;
   }
+
+  const shouldShowMoviesBySearch =
+    movieName.trim() && moviesBySearch?.results?.length > 0;
 
   return (
     <>
@@ -92,15 +100,7 @@ function MoviesCards() {
         setOpenSnackBar={setOpenSnackBar}
         errorMessage={errorMessage}
       />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          gap: "16px",
-        }}
-      >
+      <Container>
         {shouldShowMoviesBySearch
           ? moviesBySearch?.results?.map((movie) => {
               return (
@@ -120,9 +120,25 @@ function MoviesCards() {
                 />
               );
             })}
-      </Box>
+      </Container>
     </>
   );
 }
+
+const Container = ({ children }) => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        gap: "16px",
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
 
 export { MoviesCards };

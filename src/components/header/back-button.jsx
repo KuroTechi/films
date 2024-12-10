@@ -1,10 +1,11 @@
 import HouseIcon from "@mui/icons-material/House";
 import { Link } from "react-router-dom";
 import { IconButton, Tooltip } from "@mui/material";
-function BackButton() {
+
+function BackToMainPageButton() {
   return (
     <Link to={"/"}>
-      <Tooltip title="Home">
+      <Tooltip title="Главная">
         <IconButton
           size="small"
           aria-label="back to main page"
@@ -19,4 +20,4 @@ function BackButton() {
   );
 }
 
-export { BackButton };
+export { BackToMainPageButton };

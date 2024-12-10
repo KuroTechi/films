@@ -17,19 +17,15 @@ function FavoriteButton({ isFavorite, movie }) {
   return (
     <>
       {isFavorite ? (
-        <div>
-          <StarRateIcon
-            onClick={handleDeleteFavoriteMovie}
-            sx={{ cursor: "pointer", color: "rgba(0, 0, 0, 0.6)" }}
-          />
-        </div>
+        <StarRateIcon
+          onClick={handleDeleteFavoriteMovie}
+          sx={{ cursor: "pointer", color: "rgba(0, 0, 0, 0.6)" }}
+        />
       ) : (
-        <div>
-          <StarBorderIcon
-            onClick={handleAddFavoriteMovie}
-            sx={{ cursor: "pointer", color: "rgba(0, 0, 0, 0.6)" }}
-          />
-        </div>
+        <StarBorderIcon
+          onClick={handleAddFavoriteMovie}
+          sx={{ cursor: "pointer", color: "rgba(0, 0, 0, 0.6)" }}
+        />
       )}
     </>
   );

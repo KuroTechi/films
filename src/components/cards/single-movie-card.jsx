@@ -19,29 +19,52 @@ function SingleMovieCard({ movie, favoriteMovies }) {
   );
 
   return (
-    <Card sx={{ maxWidth: "296px", maxHeight: "324px" }}>
+    <Card
+      sx={{
+        width: "296px",
+        height: "324px",
+        display: "flex",
+        flexDirection: "column",
+        boxShadow: 3,
+        borderRadius: 3,
+        overflow: "hidden",
+      }}
+    >
       <Link
         style={{ textDecoration: "none", color: "inherit" }}
         to={`/details/${movieId}`}
       >
         <CardMedia
-          sx={{ width: "296px", height: "240px" }}
+          sx={{
+            width: "100%",
+            height: "240px",
+            objectFit: "cover",
+          }}
           component="img"
-          alt="image"
+          alt="movie image"
           image={imgUrl}
         />
       </Link>
-      <CardContent>
+      <CardContent
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "8px",
+        }}
+      >
         <Typography
           gutterBottom
-          variant="h5"
+          variant="h6"
           component="div"
           sx={{
             display: "flex",
             gap: "10px",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: "5px",
+            fontSize: "16px",
+            marginBottom: "8px",
           }}
         >
           {movieTitle}

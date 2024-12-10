@@ -10,13 +10,12 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import { Link, useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
-import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { removeLocalStorageItem } from "../../utils/utils";
 import { useDispatch } from "react-redux";
 import { removeUserToken } from "../../store/userInfoSlice";
 
-export default function Profile() {
+function AppMenuIcon() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,7 +34,7 @@ export default function Profile() {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Menu">
+        <Tooltip title="Профиль">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -90,12 +89,6 @@ export default function Profile() {
           <Avatar /> Профиль
         </MenuItem>
         <Divider />
-        <MenuItem disabled={true} onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Настройки
-        </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
@@ -107,4 +100,4 @@ export default function Profile() {
   );
 }
 
-export { Profile };
+export { AppMenuIcon };

@@ -1,9 +1,7 @@
 import { Box } from "@mui/material";
 import { SingleMovieCard } from "../cards/single-movie-card.jsx";
 import { useEffect, useState } from "react";
-import Spinner from "../spinner/spinner.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { getFavoriteMovies } from "../../store/favoriteMoviesSlice.js";
+import { useSelector } from "react-redux";
 import { AutohideSnackbar } from "../cards/auto-hide-Snackbar.jsx";
 
 function FavoriteMoviesCards() {
@@ -32,6 +30,7 @@ function FavoriteMoviesCards() {
       handleSnakeBarOpen();
     }
   }, [dataBaseErrorAddOrRemoveFavoriteMovie]);
+
   useEffect(() => {
     if (favoriteMoviesError) {
       setErrorMessage(favoriteMoviesError);
@@ -39,9 +38,9 @@ function FavoriteMoviesCards() {
     }
   }, [favoriteMoviesError]);
 
-  if (!favoriteMovies || favoriteMovies.length === 0) {
-    return "Нет избранных фильмов";
-  }
+  const shoudShowMessageNoFavoriteMovies =
+    !favoriteMovies || favoriteMovies.length === 0;
+
   return (
     <>
       <AutohideSnackbar
@@ -49,15 +48,8 @@ function FavoriteMoviesCards() {
         setOpenSnackBar={setOpenSnackBar}
         errorMessage={errorMessage}
       />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          gap: "16px",
-        }}
-      >
+      <Container>
+        {shoudShowMessageNoFavoriteMovies && "Нет избранных фильмов"}
         {favoriteMovies?.map((movie) => {
           return (
             <SingleMovieCard
@@ -67,9 +59,25 @@ function FavoriteMoviesCards() {
             />
           );
         })}
-      </Box>
+      </Container>
     </>
   );
 }
+
+const Container = ({ children }) => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        gap: "16px",
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
 
 export { FavoriteMoviesCards };

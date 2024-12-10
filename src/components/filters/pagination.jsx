@@ -15,6 +15,7 @@ function FiltersPagination() {
   );
   const movieName = useSelector((state) => state.moviesBySearch.movieName);
   const trimmedMovieName = movieName.trim();
+
   const handleChangeSearchMoviesPage = (e, newValue) => {
     dispatch(setSearchPaginationPage({ page: newValue }));
   };

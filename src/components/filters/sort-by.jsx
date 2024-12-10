@@ -9,13 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSortBy } from "../../store/filtersSlice";
 
 export default function SortBy() {
-  const dispatch1 = useDispatch();
+  const dispatch = useDispatch();
 
   const sortBy = useSelector((state) => state.filters.sortBy);
 
   const handleChange = (event) => {
     const value = event.target.value;
-    dispatch1(setSortBy({ sortBy: value }));
+    dispatch(setSortBy({ sortBy: value }));
   };
   return (
     <Box sx={{ minWidth: 120, padding: "16px" }}>

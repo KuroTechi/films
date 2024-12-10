@@ -6,6 +6,7 @@ import { resetMoviesBySearch } from "../../store/moviesBySearchSlice";
 
 function ResetFiltersButton() {
   const dispatch = useDispatch();
+
   const handleResetFiltersAndMoviesBySearch = () => {
     dispatch(resetFilters());
     dispatch(resetMoviesBySearch());
