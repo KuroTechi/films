@@ -8,9 +8,17 @@ import { getUserInfo } from "../../store/userInfoSlice";
 import Button from "@mui/material/Button";
 import { FavoriteMoviesCards } from "./favorite-movies-cards";
 import { AboutUser } from "./about-user";
+import { RandomMovie } from "./random-movie";
 function ProfilePage() {
   const [openPage, setOpenPage] = useState("Избранные фильмы");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const item = localStorage.getItem("profilePage");
+    if (item) {
+      setOpenPage(item);
+    }
+  }, []);
 
   const isLoadingUserInfo = useSelector((state) => state.userInfo.isLoading);
   const isLoadingFavoriteMovies = useSelector(
@@ -25,6 +33,7 @@ function ProfilePage() {
 
   const handleSetPage = (page) => {
     setOpenPage(page);
+    localStorage.setItem("profilePage", page);
   };
 
   const pages = ["Избранные фильмы", "Аккаунт", "Случайный фильм"];
@@ -70,6 +79,7 @@ function NavigationButtons({ openPage, pages, handleSetPage }) {
       <Box component={"div"}>
         {openPage === pages[0] && <FavoriteMoviesCards />}
         {openPage === pages[1] && <AboutUser />}
+        {openPage === pages[2] && <RandomMovie />}
       </Box>
     </>
   );

@@ -15,7 +15,6 @@ function UserCard() {
   const image_path = userInfo?.avatar?.tmdb?.avatar_path;
   const base_url = "https://image.tmdb.org/t/p/w500";
   const full_url = image_path ? `${base_url}${image_path}` : null;
-  console.log(full_url);
 
   const handleLogout = () => {
     removeLocalStorageItem("token");

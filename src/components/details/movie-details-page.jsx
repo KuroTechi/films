@@ -81,10 +81,14 @@ function MovieDetailsPage() {
   }, [movieId, dispatch]);
 
   if (errorFavoriteMovies) {
-    return <ErrorPage errorMessage={errorFavoriteMovies} />;
+    return (
+      <ErrorPage errorMessage={errorFavoriteMovies} showbackButton={true} />
+    );
   }
+  const isLoadingMoviesData =
+    isLoadingDetails || isLoadingCredits || isLoadingFavoriteMovies;
 
-  if (isLoadingDetails || isLoadingCredits || isLoadingFavoriteMovies) {
+  if (isLoadingMoviesData) {
     return (
       <Box
         sx={{
@@ -106,18 +110,10 @@ function MovieDetailsPage() {
         setOpenSnackBar={setOpenSnackBar}
         errorMessage={errorMessage}
       />
-      <div
-        style={{
-          // maxWidth: "1280px",
-          margin: "0 auto",
-          width: "100%",
-        }}
-      >
-        <MenuAppBar title={`Фильмы - ${movieTitle}`} />
+      <MenuAppBar title={`Фильмы - ${movieTitle}`} backButton={true} />
+      <PageWrapper>
         <Box
           sx={{
-            maxHeight: "777px",
-            maxWidth: "1280px",
             display: "flex",
             gap: "24px",
             padding: "24px",
@@ -125,28 +121,49 @@ function MovieDetailsPage() {
         >
           <MovieImg details={details} />
           <FavoriteButton isFavorite={isFavorite} movie={details} />
-          <Box
-            sx={{
-              display: "flex",
-              gap: "10px",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
+          <DetailsAndCreditsContainer>
             <TypographyMovieNameAndYear title={movieTitleAndYear} />
             <BackButton />
             <Details details={details} />
             <Credits credits={credits} />
-          </Box>
+          </DetailsAndCreditsContainer>
         </Box>
-      </div>
+      </PageWrapper>
     </>
   );
 }
 
-export { MovieDetailsPage };
+const PageWrapper = ({ children }) => {
+  return (
+    <Box
+      component={"div"}
+      sx={{
+        maxWidth: "1280px",
+        margin: "0 auto",
+        width: "100%",
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
 
-function TypographyMovieNameAndYear({ title }) {
+const DetailsAndCreditsContainer = ({ children }) => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        gap: "10px",
+        flexDirection: "column",
+        alignItems: "flex-start",
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
+
+const TypographyMovieNameAndYear = ({ title }) => {
   return (
     <>
       <Typography variant="h3" sx={{ paddingBottom: "10px" }}>
@@ -154,4 +171,6 @@ function TypographyMovieNameAndYear({ title }) {
       </Typography>
     </>
   );
-}
+};
+
+export { MovieDetailsPage };

@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { AuthorizationAndRegistration } from "../authorization-registration/auth-or-reg";
-import { AppMenuIcon } from "../profile/profile";
+import { AppMenuIcon } from "../profile/app-menu-icon";
 import { getAndValidateLocalStorageItem } from "../../utils/utils";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";

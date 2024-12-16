@@ -39,7 +39,7 @@ function Details({ details }) {
   );
 }
 
-function TypographyDetails({ title, details }) {
+const TypographyDetails = ({ title, details }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <Typography sx={{ width: "200px" }} variant="subtitle1">
@@ -50,6 +50,6 @@ function TypographyDetails({ title, details }) {
       </Typography>
     </Box>
   );
-}
+};
 
 export { Details };

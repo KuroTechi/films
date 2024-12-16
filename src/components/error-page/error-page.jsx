@@ -1,7 +1,7 @@
 import { MenuAppBar } from "../header/app-bar";
 import { Box, Typography, Button } from "@mui/material";
 import { useSelector } from "react-redux";
-function ErrorPage() {
+function ErrorPage({ showBackButton }) {
   const moviesByFiltersError = useSelector(
     (state) => state.moviesByFilters.error
   );
@@ -25,7 +25,7 @@ function ErrorPage() {
 
   return (
     <Box>
-      <MenuAppBar title={`Фильмы - Ошибка`} />
+      <MenuAppBar title={`Фильмы - Ошибка`} backButton={showBackButton} />
       <Box
         sx={{
           margin: "0 auto",

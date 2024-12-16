@@ -21,7 +21,7 @@ export default function SortBy() {
     <Box sx={{ minWidth: 120, padding: "16px" }}>
       <FormControl variant="standard" fullWidth>
         <InputLabel shrink>Сортировать по</InputLabel>
-        <Select value={sortBy} label="Age" onChange={handleChange}>
+        <Select value={sortBy} onChange={handleChange}>
           {sortByValues.map((item) => (
             <MenuItem key={item} value={item}>
               {item}

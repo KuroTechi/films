@@ -6,6 +6,7 @@ import movieDetailsReducer from "./movieDetailsSlice";
 import moviesBySearchReducer from "./moviesBySearchSlice";
 import userInfoReducer from "./userInfoSlice";
 import utilsReducer from "./utilsSlice";
+import randomMovieReducer from "./randomMovieSlice";
 export default configureStore({
   reducer: {
     utils: utilsReducer,
@@ -15,5 +16,6 @@ export default configureStore({
     favoriteMovies: favoriteMoviesReducer,
     movieDetails: movieDetailsReducer,
     moviesBySearch: moviesBySearchReducer,
+    randomMovie: randomMovieReducer,
   },
 });

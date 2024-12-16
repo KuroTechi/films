@@ -48,7 +48,7 @@ function FavoriteMoviesCards() {
         setOpenSnackBar={setOpenSnackBar}
         errorMessage={errorMessage}
       />
-      <Container>
+      <MainPageContainer>
         {shoudShowMessageNoFavoriteMovies && "Нет избранных фильмов"}
         {favoriteMovies?.map((movie) => {
           return (
@@ -59,12 +59,12 @@ function FavoriteMoviesCards() {
             />
           );
         })}
-      </Container>
+      </MainPageContainer>
     </>
   );
 }
 
-const Container = ({ children }) => {
+const MainPageContainer = ({ children }) => {
   return (
     <Box
       sx={{
