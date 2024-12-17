@@ -1,6 +1,7 @@
 import { MenuAppBar } from "../header/app-bar";
 import { Box, Typography, Button } from "@mui/material";
 import { useSelector } from "react-redux";
+
 function ErrorPage({ showBackButton }) {
   const moviesByFiltersError = useSelector(
     (state) => state.moviesByFilters.error
@@ -11,6 +12,7 @@ function ErrorPage({ showBackButton }) {
   const favoriteMoviesError = useSelector(
     (state) => state.favoriteMovies.error
   );
+
   const errors = [
     moviesByFiltersError,
     moviesBySearchError,
@@ -19,6 +21,7 @@ function ErrorPage({ showBackButton }) {
 
   let errorMessage = errors.filter((error) => error);
   let errorId = null;
+
   const handleClickReloadPage = () => {
     window.location.reload();
   };
@@ -38,7 +41,11 @@ function ErrorPage({ showBackButton }) {
         }}
       >
         <Typography variant="h2">Oops!</Typography>
-        <Typography variant="h6">Произошла ошибка</Typography>
+        <Typography variant="h6">
+          {errorMessage.length > 1
+            ? "Произошёл ряд ошибок"
+            : "Произошла ошибка"}
+        </Typography>
         <ul>
           {errorMessage.map((error, index) => (
             <li key={errorId++}>{`${index + 1}. ${error}`}</li>

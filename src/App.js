@@ -9,8 +9,11 @@ import { ErrorPage } from "./components/error-page/error-page";
 import { getAndValidateLocalStorageItem } from "./utils/utils";
 function App() {
   const dispatch = useDispatch();
+
   const userTokenLocalStorage = getAndValidateLocalStorageItem("token");
+
   const userTokenStore = useSelector((state) => state.userInfo.userToken);
+
   const moviesByFiltersError = useSelector(
     (state) => state.moviesByFilters.error
   );
@@ -20,15 +23,20 @@ function App() {
   const favoriteMoviesError = useSelector(
     (state) => state.favoriteMovies.error
   );
+
   useEffect(() => {
     if (userTokenLocalStorage) {
       dispatch(addUserToken({ userToken: userTokenLocalStorage }));
     }
   }, [dispatch, userTokenLocalStorage]);
 
-  if (moviesByFiltersError || moviesBySearchError || favoriteMoviesError) {
+  const showErrorPage =
+    moviesByFiltersError || moviesBySearchError || favoriteMoviesError;
+
+  if (showErrorPage) {
     return <ErrorPage />;
   }
+
   return (
     <div className="app-container">
       <MenuAppBar />

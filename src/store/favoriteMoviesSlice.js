@@ -48,7 +48,9 @@ export const getFavoriteMovies = createAsyncThunk(
         error.message === "Failed to fetch" ||
         error.message.includes("NetworkError")
       ) {
-        return rejectWithValue(networkErrorMessage);
+        return rejectWithValue(
+          "Запрос избранных фильмов - " + networkErrorMessage
+        );
       }
 
       return rejectWithValue(error.message || "Неизвестная ошибка");

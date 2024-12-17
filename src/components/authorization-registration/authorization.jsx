@@ -6,9 +6,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { setTokenLocalStorage, validateUserAPIKey } from "./action";
 import { useState } from "react";
 import { UserIconButton } from "./icon-button";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeValidateUserTokenError,
+  validateUserToken,
+} from "../../store/userInfoSlice";
+import { useEffect } from "react";
 
 function Authorization({ open, handleOpen, handleCloseAuth, handleCloseReg }) {
   return (
@@ -25,48 +30,29 @@ function Authorization({ open, handleOpen, handleCloseAuth, handleCloseReg }) {
   );
 }
 
-function FormDialog({ open, handleCloseAuth, handleCloseReg }) {
+function FormDialog({ open, handleCloseAuth }) {
+  const dispatch = useDispatch();
   const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [disalbeDialog, setDisableDialog] = useState(false);
+  const isLoading = useSelector(
+    (state) => state.userInfo.validateUserToken.isLoading
+  );
+  const errorValidateToken = useSelector(
+    (state) => state.userInfo.validateUserToken.error
+  );
+  const resultValidateToken = useSelector(
+    (state) => state.userInfo.validateUserToken?.result?.success
+  );
+  useEffect(() => {
+    if (resultValidateToken) {
+      window.location.reload();
+    }
+  }, [resultValidateToken]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    setError(false);
+    dispatch(removeValidateUserTokenError());
   };
 
-  async function validateUserKey() {
-    setDisableDialog(true);
-    const response = await validateUserAPIKey(value);
-    switch (response) {
-      case "valid token": {
-        setTokenLocalStorage(value);
-        setDisableDialog(false);
-        handleCloseAuth();
-        handleCloseReg();
-        window.location.reload();
-        break;
-      }
-      case "invalid token": {
-        setError(true);
-        setErrorMessage("Введён неверный код");
-        setDisableDialog(false);
-        break;
-      }
-      case "connect API error": {
-        setError(true);
-        setErrorMessage("Произошла ошибка при соединении, попробуйте позже.");
-        setDisableDialog(false);
-        break;
-      }
-      default: {
-        setError(true);
-        setErrorMessage("Неизвестная ошибка");
-        setDisableDialog(false);
-      }
-    }
-  }
   return (
     <>
       <Dialog open={open} onClose={handleCloseAuth}>
@@ -86,19 +72,19 @@ function FormDialog({ open, handleCloseAuth, handleCloseReg }) {
             fullWidth
             variant="standard"
             onChange={handleChange}
-            disabled={disalbeDialog}
-            error={error}
-            helperText={error ? errorMessage : ""}
+            disabled={isLoading}
+            error={errorValidateToken && true}
+            helperText={errorValidateToken ? errorValidateToken : ""}
           />
         </DialogContent>
         <DialogActions>
-          <Button disabled={disalbeDialog} onClick={handleCloseAuth}>
+          <Button disabled={isLoading} onClick={handleCloseAuth}>
             Назад
           </Button>
           <Button
-            disabled={!value || disalbeDialog}
+            disabled={!value || isLoading}
             onClick={() => {
-              validateUserKey();
+              dispatch(validateUserToken({ token: value }));
             }}
             type="button"
           >

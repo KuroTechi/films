@@ -21,7 +21,9 @@ export const getMoviesByFilters = createAsyncThunk(
         error.message === "Failed to fetch" ||
         error.message.includes("NetworkError")
       ) {
-        return rejectWithValue(networkErrorMessage);
+        return rejectWithValue(
+          "Запрос фильмов по фильтрам - " + networkErrorMessage
+        );
       }
       return rejectWithValue(error.message);
     }

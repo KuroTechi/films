@@ -28,8 +28,6 @@ export const getRandomMovie = createAsyncThunk(
       while (visitedMoviesId.size < firstData.total_results) {
         try {
           fetchTimes += 1;
-          console.log(fetchTimes);
-
           const randomPage =
             Math.floor(Math.random() * (maxPage - minPage + 1)) + minPage;
 
