@@ -1,1 +1,1 @@
-Стек: JS, React, RTK, MUI, CSS, запросы через REST API, роутинг - React Router, сборщик - Webpack.
+Стек: JavaScript (ES6+), React, Redux Toolkit (RTK) с createAsyncThunk для REST API, Material-UI (MUI), CSS, React Router, Webpack.
